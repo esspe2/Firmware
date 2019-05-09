@@ -252,7 +252,14 @@ void   Axis::test(){
     
     //print something to prevent the connection from timing out
     Serial.print(F("<Idle,MPos:0,0,0,WPos:0.000,0.000,0.000>"));
-    
+//#ifdef DEBUG
+    Serial.println();
+    Serial.print(F("==============> SET: "));
+    Serial.print(howManyTimesEEPEWasSet);
+    Serial.print(F(" #CLR: "));
+    Serial.println( howManyTimesEEPEWasClear);
+//#endif
+
     int i = 0;
     double encoderPos = motorGearboxEncoder.encoder.read(); //record the position now
     
@@ -275,7 +282,14 @@ void   Axis::test(){
     //record the position again
     encoderPos = motorGearboxEncoder.encoder.read();
     Serial.print(F("<Idle,MPos:0,0,0,WPos:0.000,0.000,0.000>"));
-    
+//#ifdef DEBUG
+    Serial.println();
+    Serial.print(F("==============> SET: "));
+    Serial.print(howManyTimesEEPEWasSet);
+    Serial.print(F(" #CLR: "));
+    Serial.println( howManyTimesEEPEWasClear);
+//#endif
+
     //move the motor in the other direction
     i = 0;
     while (i < 1000){

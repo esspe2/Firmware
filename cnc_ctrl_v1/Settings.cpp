@@ -23,6 +23,11 @@ Copyright 2014-2017 Bar Smith*/
 #include "Maslow.h"
 #include <EEPROM.h>
 
+//#ifdef DEBUG
+volatile long howManyTimesEEPEWasSet=0;
+volatile long howManyTimesEEPEWasClear=0;
+//#endif
+
 void settingsLoadFromEEprom(){
     /*
     Loads data from EEPROM if EEPROM data is valid, only called on startup
@@ -160,6 +165,7 @@ void settingsSaveStepstoEEprom(){
         zAxis.steps(),
         EEPROMVALIDDATA
       };
+      debugEEPE();
       EEPROM.put(310, sysSteps);
       sys.writeStepsToEEPROM = false;
     }

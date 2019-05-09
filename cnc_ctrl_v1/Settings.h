@@ -110,4 +110,13 @@ void settingsSaveStepstoEEprom();
 void settingsLoadStepsFromEEprom();
 byte settingsStoreGlobalSetting(const byte&,const float&);
 
+//#define DEBUG 1
+
+//#ifdef DEBUG
+extern volatile long howManyTimesEEPEWasSet;
+extern volatile long howManyTimesEEPEWasClear;
+#define debugEEPE() if (EECR & (1<<EEPE)) {howManyTimesEEPEWasSet++;} else {howManyTimesEEPEWasClear++;}
+//#else #define debugEEPE() ;
+//#endif
+
 #endif
