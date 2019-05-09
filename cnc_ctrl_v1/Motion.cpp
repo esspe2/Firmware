@@ -84,13 +84,13 @@ int   coordinatedMove(const float& xEnd, const float& yEnd, const float& zEnd, f
     float  zMaxFeed          = sysSettings.maxZRPM * abs(zAxis.getPitch());
     
     //find the total distances to move
-    float  distanceToMoveInMM         = sqrt(  sq(xEnd - xStartingLocation)  +  sq(yEnd - yStartingLocation)  + sq(zEnd - zStartingLocation));
     float  xDistanceToMoveInMM        = xEnd - xStartingLocation;
     float  yDistanceToMoveInMM        = yEnd - yStartingLocation;
     float  zDistanceToMoveInMM        = zEnd - zStartingLocation;
+    float  distanceToMoveInMM         = sqrt(  sq(xDistanceToMoveInMM)  +  sq(yDistanceToMoveInMM)  + sq(zDistanceToMoveInMM));
     
     //compute feed details
-    MMPerMin = constrain(MMPerMin, 1, sysSettings.maxFeed);   //constrain the maximum feedrate, 35ipm = 900 mmpm
+    MMPerMin = constrain(MMPerMin, 1, sysSettings.maxFeed);   //constrain the maximum feedrate, 35ipm = 900 mmpm = 15mmps
     float  stepSizeMM           = computeStepSize(MMPerMin);
     float  finalNumberOfSteps   = abs(distanceToMoveInMM/stepSizeMM);
     float  delayTime            = LOOPINTERVAL;
