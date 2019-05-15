@@ -82,10 +82,6 @@ void setup(){
     Serial.println(F("ready"));
     reportStatusMessage(STATUS_OK);
 
-    // troubleshooting PIN20, PIN21
-    // disable twi module, acks, and twi interrupt
-    TWCR &= ~(_BV(TWEN) | _BV(TWIE) | _BV(TWEA));
-
 }
 
 void runsOnATimer(){
