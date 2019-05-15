@@ -115,6 +115,10 @@ byte settingsStoreGlobalSetting(const byte&,const float&);
 //#ifdef DEBUG
 extern volatile long howManyTimesEEPEWasSet;
 extern volatile long howManyTimesEEPEWasClear;
+extern volatile long howManyTimesmaslowDelay; 
+extern volatile long howManyTimesexecSystemRealtime; 
+extern volatile long howManyTimessystemSaveAxesPosition; 
+extern volatile long howManyTimessettingsSaveStepstoEEprom;
 #define debugEEPE() if (EECR & (1<<EEPE)) {howManyTimesEEPEWasSet++;} else {howManyTimesEEPEWasClear++;}
 //#else #define debugEEPE() ;
 //#endif

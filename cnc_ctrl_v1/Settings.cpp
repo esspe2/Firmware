@@ -26,6 +26,10 @@ Copyright 2014-2017 Bar Smith*/
 //#ifdef DEBUG
 volatile long howManyTimesEEPEWasSet=0;
 volatile long howManyTimesEEPEWasClear=0;
+volatile long howManyTimesmaslowDelay=0; 
+volatile long howManyTimesexecSystemRealtime=0; 
+volatile long howManyTimessystemSaveAxesPosition=0; 
+volatile long howManyTimessettingsSaveStepstoEEprom=0;
 //#endif
 
 void settingsLoadFromEEprom(){
@@ -151,6 +155,7 @@ void settingsSaveToEEprom(){
 }
 
 void settingsSaveStepstoEEprom(){
+    howManyTimessettingsSaveStepstoEEprom++; // count-eeprom-writes
     /*
     Saves position to EEPROM, is called frequently by execSystemRealtime
 

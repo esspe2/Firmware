@@ -162,16 +162,17 @@ void   setupAxes(){
     else if(pcbVersion == 2){
         //PCB v1.2 Detected
 
+// Swap encoders just to test (20,21 <-> 19,18 OK, revert to normal just to check)
         //MP1 - Right Motor
-        encoder1A = 20;  // INPUT
-        encoder1B = 21;  // INPUT
+        encoder1A = 19;  // INPUT
+        encoder1B = 18;  // INPUT
         in1 = 4;         // OUTPUT
         in2 = 6;         // OUTPUT
         enA = 5;         // PWM
 
         //MP2 - Z-axis
-        encoder2A = 19;  // INPUT
-        encoder2B = 18;  // INPUT
+        encoder2A = 20;  // INPUT
+        encoder2B = 21;  // INPUT
         in3 = 7;         // OUTPUT
         in4 = 9;         // OUTPUT
         enB = 8;         // PWM
@@ -376,6 +377,7 @@ void pause(){
 
 // need to check if all returns from here check for sys.stop
 void maslowDelay(unsigned long waitTimeMs) {
+    howManyTimesmaslowDelay++; //count-eeprom-writes
   /*
    * Provides a time delay while holding the machine position, reading serial commands,
    * and periodically sending the machine position to Ground Control.  This prevents
@@ -384,8 +386,8 @@ void maslowDelay(unsigned long waitTimeMs) {
    * This is similar to the pause() command above, but provides a time delay rather than
    * waiting for the user (through Ground Control) to tell the machine to continue.
    */
-
     unsigned long startTime  = millis();
+
 
     while ((millis() - startTime) < waitTimeMs){
         execSystemRealtime();
@@ -399,6 +401,8 @@ void maslowDelay(unsigned long waitTimeMs) {
 // by this command should be relatively fast.  Should always check for sys.stop
 // after returning from this function
 void execSystemRealtime(){
+    howManyTimesexecSystemRealtime++; //count-eeprom-writes
+
     readSerialCommands();
     returnPoz();
     systemSaveAxesPosition();
@@ -407,6 +411,7 @@ void execSystemRealtime(){
 }
 
 void systemSaveAxesPosition(){
+    howManyTimessystemSaveAxesPosition++; //count-eeprom-writes
     /*
     Save steps of axes to EEPROM if they are all detached
     */

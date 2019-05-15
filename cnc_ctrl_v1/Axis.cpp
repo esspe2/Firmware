@@ -251,21 +251,31 @@ void   Axis::test(){
     Serial.println(F(" motor:"));
     
     //print something to prevent the connection from timing out
-    Serial.print(F("<Idle,MPos:0,0,0,WPos:0.000,0.000,0.000>"));
+    //Serial.print(F("<Idle,MPos:0,0,0,WPos:0.000,0.000,0.000>"));
 //#ifdef DEBUG
     Serial.println();
-    Serial.print(F("==============> SET: "));
+    Serial.print(F("= FORWARD =================================> SET: "));
     Serial.print(howManyTimesEEPEWasSet);
     Serial.print(F(" #CLR: "));
-    Serial.println( howManyTimesEEPEWasClear);
+    Serial.print(howManyTimesEEPEWasClear);
+    Serial.print(F("[ maslowDelay:"));
+    Serial.print(   howManyTimesmaslowDelay);
+    Serial.print(F(" execSystemRealtime:"));
+    Serial.print(   howManyTimesexecSystemRealtime);
+    Serial.print(F(" systemSaveAxesPosition:"));
+    Serial.print(   howManyTimessystemSaveAxesPosition);
+    Serial.print(F("SaveStepstoEEprom:"));
+    Serial.print(   howManyTimessettingsSaveStepstoEEprom);
+    Serial.println("]");
+
 //#endif
 
     int i = 0;
     double encoderPos = motorGearboxEncoder.encoder.read(); //record the position now
     
     //move the motor
+    motorGearboxEncoder.motor.directWrite(255);
     while (i < 1000){
-        motorGearboxEncoder.motor.directWrite(255);
         i++;
         maslowDelay(1);
         if (sys.stop){return;}
@@ -281,19 +291,30 @@ void   Axis::test(){
     
     //record the position again
     encoderPos = motorGearboxEncoder.encoder.read();
-    Serial.print(F("<Idle,MPos:0,0,0,WPos:0.000,0.000,0.000>"));
+    //Serial.print(F("<Idle,MPos:0,0,0,WPos:0.000,0.000,0.000>"));
 //#ifdef DEBUG
-    Serial.println();
-    Serial.print(F("==============> SET: "));
+    Serial.print(F("= BACKWARD ================================> SET: "));
     Serial.print(howManyTimesEEPEWasSet);
     Serial.print(F(" #CLR: "));
-    Serial.println( howManyTimesEEPEWasClear);
+    Serial.print(howManyTimesEEPEWasClear);
+    Serial.print(F("[ maslowDelay:"));
+    Serial.print(   howManyTimesmaslowDelay);
+    Serial.print(F(" execSystemRealtime:"));
+    Serial.print(   howManyTimesexecSystemRealtime);
+    Serial.print(F(" systemSaveAxesPosition:"));
+    Serial.print(   howManyTimessystemSaveAxesPosition);
+    Serial.print(F("SaveStepstoEEprom:"));
+    Serial.print(   howManyTimessettingsSaveStepstoEEprom);
+    Serial.println("]");
+
+
 //#endif
 
     //move the motor in the other direction
     i = 0;
+    motorGearboxEncoder.motor.directWrite(-255);
     while (i < 1000){
-        motorGearboxEncoder.motor.directWrite(-255);
+        
         i++;
         maslowDelay(1);
         if (sys.stop){return;}
@@ -309,7 +330,7 @@ void   Axis::test(){
     
     //stop the motor
     motorGearboxEncoder.motor.directWrite(0);
-    Serial.print(F("<Idle,MPos:0,0,0,WPos:0.000,0.000,0.000>"));
+    //Serial.print(F("<Idle,MPos:0,0,0,WPos:0.000,0.000,0.000>"));
 }
 
 double  Axis::pidInput(){ return _pidInput * *_mmPerRotation;}

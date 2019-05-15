@@ -1,4 +1,5 @@
 /*This file is part of the Maslow Control Software.
+ * (esspe2 working on it)
     The Maslow Control Software is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -80,6 +81,10 @@ void setup(){
     Serial.println(F("Grbl v1.00"));  // Why GRBL?  Apparently because some programs are silly and look for this as an initialization command
     Serial.println(F("ready"));
     reportStatusMessage(STATUS_OK);
+
+    // troubleshooting PIN20, PIN21
+    // disable twi module, acks, and twi interrupt
+    TWCR &= ~(_BV(TWEN) | _BV(TWIE) | _BV(TWEA));
 
 }
 
