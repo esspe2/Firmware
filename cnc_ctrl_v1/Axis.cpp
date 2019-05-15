@@ -258,15 +258,20 @@ void   Axis::test(){
     Serial.print(howManyTimesEEPEWasSet);
     Serial.print(F(" #CLR: "));
     Serial.print(howManyTimesEEPEWasClear);
-    Serial.print(F("[ maslowDelay:"));
+    Serial.print(F(          " [maslowDelay:"));
     Serial.print(   howManyTimesmaslowDelay);
-    Serial.print(F(" execSystemRealtime:"));
-    Serial.print(   howManyTimesexecSystemRealtime);
-    Serial.print(F(" systemSaveAxesPosition:"));
+    Serial.print(F(           " execSystemRealtime:"));
+    Serial.println( howManyTimesexecSystemRealtime);
+
+    Serial.print(F(   "         systemSaveAxesPosition:"));
     Serial.print(   howManyTimessystemSaveAxesPosition);
-    Serial.print(F("SaveStepstoEEprom:"));
+    Serial.print(F(           " settingsSaveStepstoEEprom:"));
     Serial.print(   howManyTimessettingsSaveStepstoEEprom);
-    Serial.println("]");
+    Serial.print(F(           " Axis attached:"));
+    if (leftAxis.attached())  Serial.print(F("L "));
+    if (rightAxis.attached()) Serial.print(F("R "));
+    if (zAxis.attached())     Serial.print(F("Z "));
+	Serial.println("]");
 
 //#endif
 
@@ -297,17 +302,22 @@ void   Axis::test(){
     Serial.print(howManyTimesEEPEWasSet);
     Serial.print(F(" #CLR: "));
     Serial.print(howManyTimesEEPEWasClear);
-    Serial.print(F("[ maslowDelay:"));
+    Serial.print(F(          " [maslowDelay:"));
     Serial.print(   howManyTimesmaslowDelay);
-    Serial.print(F(" execSystemRealtime:"));
-    Serial.print(   howManyTimesexecSystemRealtime);
-    Serial.print(F(" systemSaveAxesPosition:"));
+    Serial.print(F(           " execSystemRealtime:"));
+    Serial.println( howManyTimesexecSystemRealtime);
+    
+    Serial.print(F(   "         systemSaveAxesPosition:"));
     Serial.print(   howManyTimessystemSaveAxesPosition);
-    Serial.print(F("SaveStepstoEEprom:"));
+    Serial.print(F(           " settingsSaveStepstoEEprom:"));
     Serial.print(   howManyTimessettingsSaveStepstoEEprom);
-    Serial.println("]");
+    Serial.print(F(           " Axis attached:"));
+    if (leftAxis.attached())  Serial.print(F("L "));
+    if (rightAxis.attached()) Serial.print(F("R "));
+    if (zAxis.attached())     Serial.print(F("Z "));
+	Serial.println("]");
 
-
+    
 //#endif
 
     //move the motor in the other direction
