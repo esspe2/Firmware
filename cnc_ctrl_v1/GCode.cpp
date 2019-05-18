@@ -506,6 +506,10 @@ void  sanitizeCommandString(String& cmdString){
                 // End of '()' comment. Resume line allowed.
                 cmdString.remove(pos, 1);
                 if (line_flags & LINE_FLAG_COMMENT_PARENTHESES) { line_flags &= ~(LINE_FLAG_COMMENT_PARENTHESES); }
+            } else if (cmdString[pos] == '\n') {
+                // Leave while loop
+                bit_false(line_flags,LINE_FLAG_COMMENT_PARENTHESES);
+v
             }
         }
         else {
@@ -536,6 +540,8 @@ void  sanitizeCommandString(String& cmdString){
             }
         }
     }
+    // explicitly clear flags before reading next line
+    line_flags=0;
     #if defined (verboseDebug) && verboseDebug > 1
       // print results
       Serial.println(F("sCS execution complete"));
